@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased font-sans;
+  }
+}
+
+/* Scrollbars styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 dark:bg-slate-800 rounded-full transition-colors duration-200;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-300 dark:bg-slate-700;
+}
+
+/* Thermal receipt printing configuration rules */
+@media print {
+  /* Hide everything except the receipt print zone */
+  body * {
+    visibility: hidden;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #receipt-print-zone,
+  #receipt-print-zone * {
+    visibility: visible;
+  }
+
+  #receipt-print-zone {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    width: 72mm; /* Standard thermal paper print width width (3-inch roll) */
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #000000 !important;
+  }
+
+  /* Remove default browser print headers and footers */
+  @page {
+    size: auto;
+    margin: 5mm 0mm;
+  }
+}
